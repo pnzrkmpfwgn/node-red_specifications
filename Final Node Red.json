@@ -1,0 +1,804 @@
+[
+    {
+        "id": "d8d6a4afa148f8dc",
+        "type": "serial in",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "serial": "d0545890691feaa7",
+        "x": 170,
+        "y": 400,
+        "wires": [
+            [
+                "5b6778e2205658fd",
+                "a97f516014c81e75"
+            ]
+        ]
+    },
+    {
+        "id": "5b6778e2205658fd",
+        "type": "function",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "func": "var array = msg.payload.trim()\narray = array.split(' ') \n\n    var payloadKP = parseFloat(array[1])\n    var payloadTD = parseFloat(array[3]/10)\n    var payloadTA = parseInt(array[5]/10)\n    var payloadTB = parseInt(array[7]/10)\n    var payloadPP = parseFloat(array[9])\n    var payloadAA = parseFloat(array[11])\n    var payloadAB = parseFloat(array[13])\n    \n    var payloadC = parseFloat(array[15].replace(\"C\",\"\"))\n    if(payloadC == 0){\n        payloadC = true\n    }else{\n        payloadC = false\n    }\n\nreturn {payload:array,payloadAB,payloadKP,payloadTD,payloadTA,payloadTB,payloadPP,payloadAA,payloadC}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 400,
+        "wires": [
+            [
+                "fc3d9e70b81ddf39",
+                "8d38f59e949a0b21",
+                "1eff3a5a63bcc60b",
+                "f80ac8d6f0c21e23",
+                "1e7c58fb508d8202",
+                "398d5fb1c61d6e49",
+                "d23c3ce1f0e93399",
+                "959675c0b6d248f1"
+            ]
+        ]
+    },
+    {
+        "id": "d3021388745d73a7",
+        "type": "ui_slider",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "label": "KP",
+        "tooltip": "",
+        "group": "ce2c963b0930dd3d",
+        "order": 0,
+        "width": "6",
+        "height": "6",
+        "passthru": true,
+        "outs": "end",
+        "topic": "payload",
+        "topicType": "msg",
+        "min": "0",
+        "max": "20",
+        "step": "1",
+        "className": "",
+        "x": 830,
+        "y": 200,
+        "wires": [
+            [
+                "0065fb23db351b7a"
+            ]
+        ],
+        "icon": "node-red/inject.svg",
+        "info": "# KP\r\nThis is KP value. "
+    },
+    {
+        "id": "6362cd5d755825f8",
+        "type": "ui_slider",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "label": "ThD",
+        "tooltip": "",
+        "group": "ce2c963b0930dd3d",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "32",
+        "max": "36",
+        "step": "2",
+        "className": "",
+        "x": 830,
+        "y": 260,
+        "wires": [
+            [
+                "97a27c0ae88f6040"
+            ]
+        ],
+        "icon": "node-red/inject.svg",
+        "info": "# ThD\r\nThis is desired temperature value."
+    },
+    {
+        "id": "fc3d9e70b81ddf39",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payloadTD",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 260,
+        "wires": [
+            [
+                "6362cd5d755825f8"
+            ]
+        ]
+    },
+    {
+        "id": "d23c3ce1f0e93399",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payloadKP",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 200,
+        "wires": [
+            [
+                "d3021388745d73a7"
+            ]
+        ]
+    },
+    {
+        "id": "8d38f59e949a0b21",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payloadTA",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 320,
+        "wires": [
+            [
+                "dfec83f6cf6beba9",
+                "e70abdaa3d097c96"
+            ]
+        ]
+    },
+    {
+        "id": "1eff3a5a63bcc60b",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payloadTB",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 380,
+        "wires": [
+            [
+                "55706f0829366467",
+                "a3aee9405b173334"
+            ]
+        ]
+    },
+    {
+        "id": "7e704e24b3c175c7",
+        "type": "debug",
+        "z": "9c71ea10f49286eb",
+        "d": true,
+        "name": "message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "dfec83f6cf6beba9",
+        "type": "ui_widget_thermometer",
+        "z": "9c71ea10f49286eb",
+        "group": "a17d51865ed12938",
+        "order": 2,
+        "width": "6",
+        "height": "6",
+        "name": "TA",
+        "title": "Heater Air Temperature",
+        "numColor": "3",
+        "colorTop": "#ff1100",
+        "colorMiddle": "#fbff00",
+        "colorBottom": "#a8d8ff",
+        "unit": "°C",
+        "scale": "small",
+        "minTemp": "35",
+        "maxTemp": "37",
+        "minTempMoreThanMaxTemp": "1",
+        "numberOfDecimals": "0",
+        "showPercentage": "0",
+        "x": 1030,
+        "y": 320,
+        "wires": [],
+        "inputLabels": [
+            "10"
+        ]
+    },
+    {
+        "id": "55706f0829366467",
+        "type": "ui_widget_thermometer",
+        "z": "9c71ea10f49286eb",
+        "group": "a17d51865ed12938",
+        "order": 2,
+        "width": "6",
+        "height": "6",
+        "name": "TB",
+        "title": "Baby Skin Temperature",
+        "numColor": "",
+        "colorTop": "#ff1100",
+        "colorMiddle": "#fbff00",
+        "colorBottom": "#008cff",
+        "unit": "°C",
+        "scale": "small",
+        "minTemp": "33",
+        "maxTemp": "42",
+        "minTempMoreThanMaxTemp": "1",
+        "numberOfDecimals": "0",
+        "showPercentage": "0",
+        "x": 1030,
+        "y": 380,
+        "wires": [],
+        "inputLabels": [
+            "10"
+        ]
+    },
+    {
+        "id": "f80ac8d6f0c21e23",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payloadAA",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 440,
+        "wires": [
+            [
+                "a10b6ff362dc240b"
+            ]
+        ]
+    },
+    {
+        "id": "a10b6ff362dc240b",
+        "type": "ui_input",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "group": "ce2c963b0930dd3d",
+        "order": 2,
+        "width": "3",
+        "height": 1,
+        "label": "Alarm",
+        "stateField": "payload",
+        "useThemeColors": false,
+        "options": [
+            {
+                "label": "AA",
+                "value": "1",
+                "valueType": "num",
+                "color": "#f00000"
+            },
+            {
+                "label": "None",
+                "value": "0",
+                "valueType": "str",
+                "color": "#0062ff"
+            }
+        ],
+        "x": 830,
+        "y": 440,
+        "wires": [],
+        "info": "# Air Alarm\r\nAir alarm turned on when air temperature reaches to 35 C and above."
+    },
+    {
+        "id": "1e7c58fb508d8202",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payloadPP",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 560,
+        "wires": [
+            [
+                "a62f86e67c185bb5"
+            ]
+        ]
+    },
+    {
+        "id": "398d5fb1c61d6e49",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payloadC",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 620,
+        "wires": [
+            [
+                "a46729c80cb51195"
+            ]
+        ]
+    },
+    {
+        "id": "e70abdaa3d097c96",
+        "type": "ui_chart",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "group": "fb0d80ea337d9964",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "ThA",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "25",
+        "ymax": "50",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff0000",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 830,
+        "y": 300,
+        "wires": [
+            []
+        ],
+        "info": "# ThA\r\nThis is temperature value for air.\r\n"
+    },
+    {
+        "id": "a62f86e67c185bb5",
+        "type": "ui_gauge",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "group": "ce13c7656e76f990",
+        "order": 0,
+        "width": "4",
+        "height": "4",
+        "gtype": "gage",
+        "title": "PP",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 830,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "a46729c80cb51195",
+        "type": "ui_switch",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "label": "SwCov",
+        "tooltip": "",
+        "group": "ce13c7656e76f990",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 840,
+        "y": 620,
+        "wires": [
+            [
+                "0369459fe44c868d"
+            ]
+        ]
+    },
+    {
+        "id": "a3aee9405b173334",
+        "type": "ui_chart",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "group": "2564c080075ba9e2",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "ThB",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "30",
+        "ymax": "40",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff0000",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 830,
+        "y": 360,
+        "wires": [
+            []
+        ],
+        "info": "# ThB\r\nThis is temperature value of the baby."
+    },
+    {
+        "id": "2783198bed93bea7",
+        "type": "serial out",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "serial": "d0545890691feaa7",
+        "x": 1220,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "0065fb23db351b7a",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload&\"p\"",
+                "tot": "jsonata",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 200,
+        "wires": [
+            [
+                "2783198bed93bea7",
+                "7e704e24b3c175c7"
+            ]
+        ]
+    },
+    {
+        "id": "97a27c0ae88f6040",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(payload*10)&\"d\"",
+                "tot": "jsonata",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 260,
+        "wires": [
+            [
+                "2783198bed93bea7"
+            ]
+        ]
+    },
+    {
+        "id": "0369459fe44c868d",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(payload)&\"*SW\"",
+                "tot": "jsonata",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 620,
+        "wires": [
+            [
+                "2783198bed93bea7"
+            ]
+        ]
+    },
+    {
+        "id": "959675c0b6d248f1",
+        "type": "change",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payloadAB",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 500,
+        "wires": [
+            [
+                "78af8f01b4ccbadd"
+            ]
+        ]
+    },
+    {
+        "id": "78af8f01b4ccbadd",
+        "type": "ui_input",
+        "z": "9c71ea10f49286eb",
+        "name": "",
+        "group": "ce2c963b0930dd3d",
+        "order": 2,
+        "width": "3",
+        "height": 1,
+        "label": "Alarm",
+        "stateField": "payload",
+        "useThemeColors": false,
+        "options": [
+            {
+                "label": "AB",
+                "value": "1",
+                "valueType": "num",
+                "color": "#ff0000"
+            },
+            {
+                "label": "None",
+                "value": "0",
+                "valueType": "str",
+                "color": "#0074f0"
+            }
+        ],
+        "x": 830,
+        "y": 500,
+        "wires": [],
+        "info": "# Baby Alarm\r\nBaby alarm turned on when baby temperature reaches to 37 C and above."
+    },
+    {
+        "id": "a97f516014c81e75",
+        "type": "debug",
+        "z": "9c71ea10f49286eb",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "d0545890691feaa7",
+        "type": "serial-port",
+        "serialport": "COM11",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "\\r\\n",
+        "responsetimeout": "500"
+    },
+    {
+        "id": "ce2c963b0930dd3d",
+        "type": "ui_group",
+        "name": "Set Control",
+        "tab": "99c6edfa4fc657e9",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": "nr-dashboard-cardtitle"
+    },
+    {
+        "id": "a17d51865ed12938",
+        "type": "ui_group",
+        "name": "Temperatures",
+        "tab": "99c6edfa4fc657e9",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fb0d80ea337d9964",
+        "type": "ui_group",
+        "name": "Heater Air Temperature",
+        "tab": "99c6edfa4fc657e9",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ce13c7656e76f990",
+        "type": "ui_group",
+        "name": "Display of SwCov and Percent Power",
+        "tab": "99c6edfa4fc657e9",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2564c080075ba9e2",
+        "type": "ui_group",
+        "name": "Baby Skin Temperature",
+        "tab": "99c6edfa4fc657e9",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "99c6edfa4fc657e9",
+        "type": "ui_tab",
+        "name": "IncuBaby Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
